@@ -2,6 +2,8 @@ Bootstrap the project as a reproducible, contributor-friendly monorepo.
 
 Use a Dockerfile-based `.devcontainer` as the canonical development environment, reusing the same base image the repository publishes for development or CI where applicable. Install required language/toolchain dependencies, Docker CLI access for image/integration workflows, useful devcontainer features, and VS Code settings/extensions. Pin major tool versions where practical for reproducibility.
 
+Configure the devcontainer to use the `ghcr.io/fjktkm/devcontainer-features/agent-persistence` feature.
+
 Install Checksy, common-utils, Node.js, shellcheck, and shfmt in the devcontainer Dockerfile.
 
 Install Checksy in the container with:
