@@ -2,7 +2,10 @@ Bootstrap the project as a reproducible, contributor-friendly monorepo.
 
 Use a Dockerfile-based `.devcontainer` as the canonical development environment, reusing the same base image the repository publishes for development or CI where applicable. Install required language/toolchain dependencies, Docker CLI access for image/integration workflows, useful devcontainer features, and VS Code settings/extensions. Pin major tool versions where practical for reproducibility.
 
-Install Checksy, common-utils, Node.js, shellcheck, and shfmt in the devcontainer Dockerfile instead of a post-create script.
+Install Checksy, common-utils, Node.js, shellcheck, and shfmt in the devcontainer Dockerfile.
+
+Install Checksy in the container with:
+`curl -fsSL https://raw.githubusercontent.com/notwillk/checksy/main/scripts/install.sh | bash`
 
 Ensure `tools/bin` is on the devcontainer `PATH`.
 
@@ -16,6 +19,7 @@ Organize the repository as:
 - `samples/*` for executable examples
 - `docs/*` for Markdown documentation
 - `images/*` for container/runtime artifacts
+- `tools/*` for support tooling for developing, packaging, deploying, and operating the repo
 
 Expose consistent root Moon tasks:
 `format`, `check`, `build`, `verify`, and `package`.
@@ -32,6 +36,6 @@ Keep docs as plain Markdown in `docs/` and the root README. The root README shou
 
 Prefer explicit automation over tribal knowledge. If contributors need to know how to build, test, package, validate, or run something, encode it as a Moon task, small script under `tools/bin`, or Checksy rule. CI, local development, documentation, samples, and agent workflows should all exercise the same commands.
 
-Provide `tools/bin/check` and `tools/bin/format` scripts that use shellcheck and shfmt, and ensure the devcontainer installs those tools.
+Use shellcheck and shfmt as the underlying commands for Moon `check` and `format` tasks, and ensure the devcontainer installs those tools.
 
 Set the devcontainer post-create command to run Checksy against `verify.checksy.yaml`.
