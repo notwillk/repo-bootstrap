@@ -2,7 +2,13 @@ Bootstrap the project as a reproducible, contributor-friendly monorepo.
 
 Use a Dockerfile-based `.devcontainer` as the canonical development environment, reusing the same base image the repository publishes for development or CI where applicable. Install required language/toolchain dependencies, Docker CLI access for image/integration workflows, useful devcontainer features, and VS Code settings/extensions. Pin major tool versions where practical for reproducibility.
 
-Configure the devcontainer to use the `ghcr.io/fjktkm/devcontainer-features/agent-persistence` feature.
+Configure the devcontainer to use the `ghcr.io/fjktkm/devcontainer-features/agent-persistence`, `ghcr.io/notwillk/devcontainer-features/codex`, and  `ghcr.io/notwillk/devcontainer-features/ssh-server` features.  The SSH server feature should take one parameter `port` with value of `"22"` (a string).
+
+Add `SSH_PUBLIC_KEY` with value `${localEnv:SSH_PUBLIC_KEY}` to `containerEnv`.
+
+Add `2222:22` as an `appPort`.
+
+Add `--privileged` to `runArgs`.
 
 Install Checksy, common-utils, Node.js, shellcheck, and shfmt in the devcontainer Dockerfile.
 
